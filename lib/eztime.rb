@@ -1,5 +1,22 @@
 require 'date'
 
+
+# The following code was based on work found at:
+# http://www.bigbold.com/snippets/user/jswizard
+class Numeric
+  # Returns the cardinal (number) and ordinal (st, nd, rd, th, etc.)
+  # Pass include_cardinal as false to only return the ordinal
+  def ordinal(include_cardinal=true)
+    cardinal = self.to_i.abs
+    if (10...20).include?(cardinal) then
+      include_cardinal ? cardinal.to_s << 'th' : 'th'
+    else
+      ord = %w{th st nd rd th th th th th th}[cardinal % 10]
+      include_cardinal ? cardinal.to_s << ord : ord
+    end
+  end
+end
+
 class Date
   # Returns only the lower two digits of the year
   # (i.e. 2006 => 06)
@@ -73,7 +90,7 @@ class Date
   
   # Returns the ordinal of the day
   # (1 => st, 2 => nd, 3 => rd, 4.. => th)
-  def ordinal; mday <= 3 ? %w{st nd rd}[mday-1] : 'th'; end
+  def ordinal; mday.ordinal(false); end
     
   # Formats the date/time according to the formatting string format_str
   # The formatting string consists of any of the methods defined in EZTime

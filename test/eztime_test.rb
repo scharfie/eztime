@@ -83,10 +83,16 @@ class EZTimeTest < Test::Unit::TestCase
   def test_ordinals
     assert_equal 'January 1st', @ny.eztime(':month_name :day:ordinal')
     
-    ordinals = (%w{st nd rd} + ['th'] * 28)
+    ordinals = %w{
+      th st nd rd th th th th th th 
+      th th th th th th th th th th
+      th st nd rd th th th th th th 
+      th st nd rd th th th th th th       
+    }
+    
     1.upto(31) do |mday|
       d = Date.civil(2006, 1, mday)
-      assert_equal ordinals[mday - 1], d.eztime(':ordinal')
+      assert_equal ordinals[mday], d.eztime(':ordinal'), "Failed on " + d.to_s
     end
   end
 end
