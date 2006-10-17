@@ -1,6 +1,5 @@
 require 'date'
 
-
 # The following code was based on work found at:
 # http://www.bigbold.com/snippets/user/jswizard
 class Numeric
@@ -17,7 +16,7 @@ class Numeric
   end
 end
 
-class Date
+module EZTime
   # Returns only the lower two digits of the year
   # (i.e. 2006 => 06)
   def syear; year.to_s[-2..-1]; end
@@ -108,4 +107,8 @@ class Date
   def eztime(format_str)
     eval("'" + format_str.gsub(/:([a-z_]{1,}[0-9]{0,2})/, '\' + \1.to_s + \'') + "'")
   end
-end
+end  
+
+# include the EZTime module into the Time and Date classes
+class Time; include EZTime; end
+class Date; include EZTime; end
