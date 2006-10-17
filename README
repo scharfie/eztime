@@ -26,10 +26,26 @@ much memorization.  For example, isn't ":month/:day/:year" easier than
 === Extensibility
 
 Perhaps the strongest feature of EZTime is that it can be "extended" by simply
-adding new methods to the Date class.  The reason this works is because EZTime
+adding new methods to the EZTime module.  The reason this works is because EZTime
 eval's the formatting string after a simple substitution, replacing the :name 
 with a method call to that name.  The upside to this is that everything you put
 in the formatting string can be accessed by itself as a method call.
+
+=== Formatting variants
+
+Certain methods have one or more variants, all following a standard convention:
+* 'z': (prefix) element will include a leading 0 digit
+* 'l': (prefix) (lowercase L): element will be converted to all lowercase
+* 's': (prefix) small variants.  For example, smeridian will return 'A' or 'P'
+* '12': (suffix): element will be in 12-hour format
+
+See the documentation for the various methods for examples of these modifiers.
+
+=== Known Issues
+
+Currently, using quotes or apostrophes in an EZTime format string is not supported - 
+it results in compile errors.  If there is a need for either of these characters, 
+however, I will look into correcting the situation.
 
 = Credits
 

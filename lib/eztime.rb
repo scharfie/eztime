@@ -1,7 +1,7 @@
 require 'date'
 
 # The following code was based on work found at:
-# http://www.bigbold.com/snippets/user/jswizard
+# http://www.bigbold.com/snippets/user/jswizard#post2368
 class Numeric
   # Returns the cardinal (number) and ordinal (st, nd, rd, th, etc.)
   # Pass include_cardinal as false to only return the ordinal
@@ -109,6 +109,8 @@ module EZTime
   end
 end  
 
-# include the EZTime module into the Time and Date classes
+# Include the EZTime module into the Time class
 class Time; include EZTime; end
+
+# Include the EZTime module into the Date class
 class Date; include EZTime; end
