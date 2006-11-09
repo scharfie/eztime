@@ -1,5 +1,6 @@
 require 'test/unit'
-require 'eztime'
+require File.dirname(__FILE__) + '/../lib/eztime'
+require File.dirname(__FILE__) + '/../lib/eztime'
 
 class EZTimeTest < Test::Unit::TestCase
   def setup
@@ -74,14 +75,28 @@ class EZTimeTest < Test::Unit::TestCase
   
   def test_all
     assert_equal '05:45 PM on December 20th, 2003 (Saturday)', 
-      @stamp.eztime(':zhour12::minute :meridian on :month_name :day:ordinal, :year (:day_name)')
+      @stamp.eztime(':zhour12::minute :meridian on :month_name :day:ord, :year (:day_name)')
       
     assert_equal '20 December 03 was a Saturday.',
       @stamp.eztime(':day :nmonth :syear was a :nday.')  
   end
   
+  def test_hours
+    0.upto(24) do |hour|
+      hour12 = hour
+      d = DateTime.civil(2000, 1, 1, hour, 0, 0)
+      meridian = d.hour >= 12 ? 'pm' : 'am'
+      hour12, meridian = 12, 'am' if d.hour == 0
+      hour12 -=12 if hour12 > 12
+      
+      expected = "#{hour12} #{d.hour} #{meridian}"
+      assert_equal expected, d.eztime(':hour12 :hour :lmeridian')
+    end
+  end
+  
   def test_ordinals
-    assert_equal 'January 1st', @ny.eztime(':month_name :day:ordinal')
+    assert_equal 'st', @ny.ord
+    assert_equal 'January 1st', @ny.eztime(':month_name :day:ord')
     
     ordinals = %w{
       th st nd rd th th th th th th 
@@ -92,7 +107,7 @@ class EZTimeTest < Test::Unit::TestCase
     
     1.upto(31) do |mday|
       d = Date.civil(2006, 1, mday)
-      assert_equal ordinals[mday], d.eztime(':ordinal'), "Failed on " + d.to_s
+      assert_equal ordinals[mday], d.eztime(':ord'), "Failed on " + d.to_s
     end
   end
 end

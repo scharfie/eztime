@@ -17,6 +17,7 @@ class Numeric
 end
 
 module EZTime
+  public
   # Returns only the lower two digits of the year
   # (i.e. 2006 => 06)
   def syear; year.to_s[-2..-1]; end
@@ -57,7 +58,7 @@ module EZTime
   
   # Returns the hour in 12-hour format
   # (5:00pm => 5)
-  def hour12;  hour == 0 ? 12 : hour % 12; end
+  def hour12;  hour % 12 == 0 ? 12 : hour % 12; end
   
   # Returns the hour in 12-hour format as a zero-padded string
   # (5:00pm => 05)
@@ -90,7 +91,8 @@ module EZTime
   # Returns the ordinal of the day
   # (1 => st, 2 => nd, 3 => rd, 4.. => th)
   def ordinal; mday.ordinal(false); end
-    
+  alias :ord :ordinal
+  
   # Formats the date/time according to the formatting string format_str
   # The formatting string consists of any of the methods defined in EZTime
   # (such as meridian, ordinal, zhour, etc.) as well as any other methods 
@@ -114,3 +116,9 @@ class Time; include EZTime; end
 
 # Include the EZTime module into the Date class
 class Date; include EZTime; end
+
+# class DateTime
+#   include EZTime
+#   def ordinal; mday.ordinal(false); end
+#   def self.ordinal; mday.ordinal(false); end
+# end
