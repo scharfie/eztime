@@ -1,5 +1,9 @@
 = EZTime 
 
+== Installation
+
+  script/plugin install http://svn.webtest.wvu.edu/repos/rails/plugins/eztime/
+
 EZTime is a simple extension to the Date class in Ruby to provide easy
 formatting of dates and times.
 
