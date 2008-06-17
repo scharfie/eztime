@@ -23,9 +23,11 @@ shame.
 h3.  Simplicity
 
 EZTime is much easier to use than strftime because it doesn't require
-much memorization.  For example, isn't ":month/:day/:year" easier than
-"%m/%d/%Y"?  Not convinced?  How about ":day:ordinal of :month_name, :year" 
-(i.e. 20th of December, 2003).
+much memorization.  For example, isn't @:month/:day/:year@ easier than
+@%m/%d/%Y@ ?
+
+Not convinced?  How about @:day:ordinal of :month_name, :year@ 
+(_i.e. 20th of December, 2003_).
 
 h3.  Extensibility
 
