@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "README.textile",
     "Rakefile",
     "VERSION",
+    "eztime.gemspec",
     "init.rb",
     "install.rb",
     "lib/eztime.rb",
