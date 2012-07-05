@@ -1,6 +1,4 @@
-require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/eztime'
-require File.dirname(__FILE__) + '/../lib/eztime'
+require 'helper'
 
 class EZTimeTest < Test::Unit::TestCase
   def setup
