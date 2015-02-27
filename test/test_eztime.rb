@@ -59,7 +59,10 @@ class EZTimeTest < Test::Unit::TestCase
   end
   
   def test_everything
+    assert_equal '00', ('%02d' % 0)
+
     d = DateTime.civil(2000, 1, 1, 0, 0, 0)
+
     0.upto(1440/5) do |min|
       d += 300 if min > 0
       assert_equal d.strftime('%I:%M'), d.eztime(':hour12::minute') 
@@ -93,7 +96,7 @@ class EZTimeTest < Test::Unit::TestCase
   end
   
   def test_ordinals
-    assert_equal 'st', @ny.ord
+    assert_equal 'st', EZTime.ordinal(1)
     assert_equal 'January 1st', @ny.eztime(':month_name :day:ord')
     
     ordinals = %w{
